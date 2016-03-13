@@ -1,0 +1,65 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "21de2ca7848ec5ce41f7b193d5c8d24c",
+    "content-hash": "74d990b9f804f1debc6d229945a3dd67",
+    "packages": [
+        {
+            "name": "caymanparrot/cayman",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CaymanParrot/Cayman.git",
+                "reference": "6041da53c0eaa439e0b294595090e1542f455b39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CaymanParrot/Cayman/zipball/531ebc059aa4258ee053a110fd1224dc33842c17",
+                "reference": "6041da53c0eaa439e0b294595090e1542f455b39",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "master-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cayman\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Haci Murat Yaman",
+                    "email": "haci@muratyaman.co.uk"
+                }
+            ],
+            "description": "Foundations for a new simple fast PHP API/Service layer",
+            "homepage": "https://github.com/CaymanParrot/Cayman.git",
+            "time": "2016-03-13 12:45:02"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "caymanparrot/cayman": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.6.0"
+    },
+    "platform-dev": []
+}

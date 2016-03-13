@@ -1,0 +1,27 @@
+{
+    "name": "caymanparrot/cayman-example",
+    "type": "library",
+    "description": "Example API project using Cayman - Fast API foundation for PHP",
+    "keywords": [],
+    "homepage": "https://github.com/CaymanParrot/Cayman-Example.git",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Haci Murat Yaman",
+            "email": "haci@muratyaman.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "caymanparrot/cayman": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "My\\": "src/" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master-dev"
+        }
+    }
+}

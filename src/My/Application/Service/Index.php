@@ -21,13 +21,13 @@ class Index extends BaseService
         
         $output = new Index\Index\Output();
 		
-		ob_start();
-		phpinfo();
-		$data = ob_get_clean();
-        $output->data[] = $data;
+		//ob_start();
+		//phpinfo();
+		//$data = ob_get_clean();
+        //$output->meta[] = $data;
 		
         //testing db
-        $sql  = 'select * from entity';
+        $sql  = 'select * from public.user';
         $rows = $this->getApp()->getDbManager()->dbFetchAllRows($sql);
         $output->data[] = $rows;
         

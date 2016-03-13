@@ -16,6 +16,9 @@ class Index extends BaseService
     
     function index(Index\Index\Input $input)
     {
+        //testing log
+        $this->getApp()->log(__METHOD__ . PHP_EOL);
+        
         $output = new Index\Index\Output();
 		
 		ob_start();
@@ -23,6 +26,11 @@ class Index extends BaseService
 		$data = ob_get_clean();
         $output->data[] = $data;
 		
+        //testing db
+        $sql  = 'select * from entity';
+        $rows = $this->getApp()->getDbManager()->dbFetchAllRows($sql);
+        $output->data[] = $rows;
+        
         return $output;
     }
     

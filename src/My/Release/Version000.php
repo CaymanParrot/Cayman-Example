@@ -3,7 +3,7 @@
 namespace Example\Release;
 
 
-class Version0001
+class Version000 extends ReleaseInitial
 {
     
 }

@@ -1,4 +1,4 @@
-CREATE TABLE public.entity_user_role (
+CREATE TABLE public.tbl_entity_user_role (
     entity_id uuid NOT NULL,
     user_id uuid NOT NULL,
     role_id smallint NOT NULL

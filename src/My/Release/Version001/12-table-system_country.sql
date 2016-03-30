@@ -1,17 +1,17 @@
-CREATE TABLE public.system_country (
+CREATE TABLE public.tbl_system_country (
     id smallint NOT NULL,
-    code varchar(32) NOT NULL,
-    name varchar(128) NOT NULL,
+    code varchar(2) NOT NULL,
+    name varchar(64) NOT NULL,
     short_description text,
     long_description text
 )
 WITH (oids = false);
 
-ALTER TABLE ONLY system_country
-    ADD CONSTRAINT system_country_pkey
+ALTER TABLE ONLY tbl_system_country
+    ADD CONSTRAINT tbl_system_country_pkey
     PRIMARY KEY (id);
 
-ALTER TABLE ONLY system_country
-    ADD CONSTRAINT system_country_code_key
+ALTER TABLE ONLY tbl_system_country
+    ADD CONSTRAINT tbl_system_country_code_key
     UNIQUE (code);
 

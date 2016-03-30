@@ -1,10 +1,10 @@
-CREATE TABLE release (
-    version VARCHAR(10),
-    code VARCHAR(100),
-    dt   timestamp with time zone DEFAULT NOW()
+CREATE TABLE public.tbl_release (
+    version VARCHAR(16),
+    code VARCHAR(64),
+    dt   timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 )
 WITH (oids = false);
 
-ALTER TABLE ONLY audit
-    ADD CONSTRAINT audit_pkey
+ALTER TABLE ONLY tbl_release
+    ADD CONSTRAINT tbl_release_pkey
     PRIMARY KEY (version, code);

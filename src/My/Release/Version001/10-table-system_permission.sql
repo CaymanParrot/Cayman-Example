@@ -1,4 +1,4 @@
-CREATE TABLE public.system_permission (
+CREATE TABLE public.tbl_system_permission (
     id serial NOT NULL,
     user_role_id smallint NOT NULL,
     entity_type_id_context smallint NOT NULL,
@@ -10,6 +10,6 @@ CREATE TABLE public.system_permission (
 )
 WITH (oids = false);
 
-ALTER TABLE ONLY system_permission
-    ADD CONSTRAINT system_permission_pkey
+ALTER TABLE ONLY tbl_system_permission
+    ADD CONSTRAINT tbl_system_permission_pkey
     PRIMARY KEY (id);

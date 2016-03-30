@@ -8,7 +8,7 @@ DECLARE
   op_flag      CHAR(1);
   user_id      UUID;
   user_id_tmp  UUID;
-  pkey         UUID;
+  entity_id    UUID;
   all_data     JSON;
   table_name   TEXT;
 BEGIN
@@ -24,23 +24,26 @@ BEGIN
 
   IF (TG_OP = 'UPDATE') THEN
     updated      = ( HSTORE(OLD.*) - HSTORE(NEW.*) );
-    pkey         = OLD.id;
+    entity_id    = OLD.id;
     updated_data = hstore_to_json(updated);
-    all_data     = hstore_to_json(HSTORE(NEW.*));
-    INSERT INTO audit (table_name, op_flag, user_id, pkey, all_data, updated_data)
-    VALUES (table_name, op_flag, user_id, pkey, all_data, updated_data);
+    all_data     = row_to_json(NEW.*);
+    INSERT INTO audit
+           (table_name, op_flag, user_id, entity_id, all_data, updated_data)
+    VALUES (table_name, op_flag, user_id, entity_id, all_data, updated_data);
     RETURN NEW;
   ELSIF (TG_OP = 'DELETE') THEN
-    all_data = row_to_json(OLD);
-    pkey     = OLD.id;
-    INSERT INTO audit (table_name, op_flag, user_id, pkey, all_data)
-    VALUES (TG_TABLE_NAME::TEXT, op_flag, user_id, pkey, all_data);
+    all_data  = row_to_json(OLD.*);
+    entity_id = OLD.id;
+    INSERT INTO audit
+           (table_name, op_flag, user_id, entity_id, all_data)
+    VALUES (table_name, op_flag, user_id, entity_id, all_data);
     RETURN OLD;
   ELSIF (TG_OP = 'INSERT') THEN
-    all_data = hstore_to_json(HSTORE(NEW.*));
-    pkey     = NEW.id;
-    INSERT INTO audit (table_name, op_flag, user_id, pkey, all_data)
-    VALUES (TG_TABLE_NAME::TEXT, op_flag, user_id, pkey, all_data);
+    all_data  = row_to_json(NEW.*);
+    entity_id = NEW.id;
+    INSERT INTO audit
+           (table_name, op_flag, user_id, entity_id, all_data)
+    VALUES (table_name, op_flag, user_id, entity_id, all_data);
     RETURN NEW;
   ELSE
     RAISE WARNING '[fun_create_audit_trail] - Other action occurred: %, at %', TG_OP, now();

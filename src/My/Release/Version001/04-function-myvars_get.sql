@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION public.fun_myvars_get (
+CREATE OR REPLACE FUNCTION public.myvars_get (
   varname varchar(100)
 )
 RETURNS TEXT AS
@@ -10,7 +10,7 @@ BEGIN
   RETURN setting;
 EXCEPTION
 WHEN others THEN
-  setting = null;
+  setting = NULL;
   RETURN setting;
 END;
 $body$

@@ -1,8 +1,9 @@
-CREATE OR REPLACE FUNCTION public.myvars_get_user_id ()
+CREATE OR REPLACE FUNCTION public.myvars_get_user_id()
 RETURNS UUID AS
 $body$
 DECLARE
   user_id UUID;
+  tmp TEXT;
 BEGIN
   user_id = NULL;
   tmp = myvars_get('user_id');

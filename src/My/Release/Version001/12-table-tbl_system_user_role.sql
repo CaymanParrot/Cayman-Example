@@ -12,5 +12,8 @@ ALTER TABLE ONLY tbl_system_user_role
     PRIMARY KEY (id);
 
 ALTER TABLE ONLY tbl_system_user_role
-    ADD CONSTRAINT tbl_system_user_role_code_key
+    ADD CONSTRAINT tbl_system_user_role_unq_code
     UNIQUE (code);
+
+CREATE INDEX tbl_system_user_role_idx_name
+    ON tbl_system_user_role USING btree (name);

@@ -8,3 +8,6 @@ WITH (oids = false);
 ALTER TABLE ONLY tbl_phone
     ADD CONSTRAINT tbl_phone_pkey
     PRIMARY KEY (id);
+
+CREATE INDEX tbl_phone_idx_number
+    ON tbl_phone USING btree (number);

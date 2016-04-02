@@ -14,3 +14,6 @@ ALTER TABLE ONLY tbl_system_entity_type
 ALTER TABLE ONLY tbl_system_entity_type
     ADD CONSTRAINT tbl_system_entity_type_code_key
     UNIQUE (code);
+
+CREATE INDEX tbl_system_entity_type_idx_name
+    ON tbl_system_entity_type USING btree (name);

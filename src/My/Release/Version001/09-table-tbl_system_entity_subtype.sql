@@ -15,3 +15,17 @@ ALTER TABLE ONLY tbl_system_entity_subtype
 ALTER TABLE ONLY tbl_system_entity_subtype
     ADD CONSTRAINT tbl_system_entity_subtype_code_key
     UNIQUE (code);
+
+CREATE INDEX tbl_system_entity_subtype_idx_name
+    ON tbl_system_entity_subtype USING btree (name);
+
+CREATE INDEX tbl_system_entity_subtype_idx_type
+    ON tbl_system_entity_subtype USING btree (entity_type_id);
+
+ALTER TABLE ONLY tbl_system_entity_subtype
+    ADD CONSTRAINT tbl_system_entity_subtype_fkey_entity_type
+    FOREIGN KEY (entity_type_id) 
+    REFERENCES tbl_system_entity_type(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+;

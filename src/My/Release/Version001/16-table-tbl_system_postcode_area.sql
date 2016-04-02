@@ -13,10 +13,17 @@ ALTER TABLE ONLY tbl_system_postcode_area
     PRIMARY KEY (id);
 
 ALTER TABLE ONLY tbl_system_postcode_area
-    ADD CONSTRAINT tbl_system_postcode_area_code_key
-    UNIQUE (code);
+    ADD CONSTRAINT tbl_system_postcode_area_unq_country_id_code
+    UNIQUE (country_id, code);
 
-CREATE INDEX system_postcode_area_country_id_idx
+CREATE INDEX tbl_system_postcode_area_idx_country_id
     ON tbl_system_postcode_area USING btree (country_id);
-CREATE UNIQUE INDEX system_postcode_area_country_code_unq
-    ON tbl_system_postcode_area USING btree (country_id, code);
+
+ALTER TABLE ONLY tbl_system_postcode_area
+    ADD CONSTRAINT tbl_system_postcode_area_fkey_country
+    FOREIGN KEY (country_id)
+    REFERENCES tbl_system_country(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+;
+

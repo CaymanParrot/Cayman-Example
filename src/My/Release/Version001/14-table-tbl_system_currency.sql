@@ -14,5 +14,5 @@ ALTER TABLE ONLY tbl_system_currency
     PRIMARY KEY (id);
 
 ALTER TABLE ONLY tbl_system_currency
-    ADD CONSTRAINT tbl_system_currency_code_key
+    ADD CONSTRAINT tbl_system_currency_unq_code
     UNIQUE (code);

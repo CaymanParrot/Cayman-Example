@@ -8,18 +8,15 @@ INHERITS (tbl_entity)
 WITH (oids = false);
 
 ALTER TABLE ONLY tbl_user
-    ADD CONSTRAINT user_pkey
+    ADD CONSTRAINT tbl_user_pkey
     PRIMARY KEY (id);
 
 ALTER TABLE ONLY tbl_user
-    ADD CONSTRAINT user_email_key
+    ADD CONSTRAINT tbl_user_unq_email
     UNIQUE (email);
 
-ALTER TABLE ONLY tbl_user
-    ADD CONSTRAINT user_code_key
-    UNIQUE (code);
-
-CREATE INDEX user_first_name_idx
+CREATE INDEX tbl_user_idx_first_name
     ON tbl_user USING btree (first_name);
-CREATE INDEX user_last_name_idx
+
+CREATE INDEX tbl_user_idx_last_name
     ON tbl_user USING btree (last_name);

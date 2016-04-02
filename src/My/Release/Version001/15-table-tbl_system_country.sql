@@ -12,6 +12,6 @@ ALTER TABLE ONLY tbl_system_country
     PRIMARY KEY (id);
 
 ALTER TABLE ONLY tbl_system_country
-    ADD CONSTRAINT tbl_system_country_code_key
+    ADD CONSTRAINT tbl_system_country_unq_code
     UNIQUE (code);
 

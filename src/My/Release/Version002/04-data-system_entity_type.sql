@@ -1,38 +1,27 @@
 SET search_path = public, pg_catalog;
 
-
 -- Data for table public.tbl_system_entity_type
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (1, 'user', 'User', 'Users', NULL);
+INSERT INTO tbl_system_entity_type
+   (id, code, name, short_description)
+VALUES
+   (1, 'token', 'Token', 'Security tokens'),
 
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (2, 'company', 'Company', 'Companies', NULL);
+   (2, 'user', 'User', 'Users'),
+   (3, 'account', 'Account', 'Accounts'),
 
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (3, 'address', 'Address', 'Addresses', NULL);
+   (4, 'address', 'Address', 'Addresses'),
+   (5, 'phone', 'Phone number', 'Phone numbers'),
 
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (4, 'phone', 'Phone number', 'Phone numbers', NULL);
+   (6, 'category', 'Category', 'Entity categories'),
 
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (5, 'item', 'Item', 'Products and services', NULL);
+   (7, 'item', 'Item', 'Products and services'),
+   --(71, 'item_price', 'Prices of Items', 'Prices of products and services'),
+   --(72, 'item_cost', 'Costs of Items', 'Costs of products and services'),
 
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (6, 'page', 'Page', 'Web pages', NULL);
+   (8, 'basket', 'Basket', 'Basket of items before confirmation'),
+   (9, 'order', 'Order', 'Orders'),
+   (10, 'order_item', 'Order Item', 'Items in orders'),
 
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (7, 'order', 'Order', 'Orders', NULL);
-
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (8, 'order_item', 'Order Item', 'Items in orders', NULL);
-
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (9, 'token', 'Token', 'Security tokens', NULL);
-
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (10, 'basket', 'Basket', 'Basket', NULL);
-
-INSERT INTO tbl_system_entity_type (id, code, name, short_description, long_description)
-VALUES (11, 'asset', 'Asset', 'Assets e.g. image, document, video, etc.', NULL);
-
-
+   (11, 'asset', 'Asset', 'Assets e.g. image, document, video, etc.'),
+   (12, 'page', 'Page', 'Web pages')
+;

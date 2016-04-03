@@ -6,7 +6,10 @@ CREATE TABLE public.tbl_order (
     value_net numeric(14,2) DEFAULT 0.0,
     value_tax numeric(14,2) DEFAULT 0.0,
     value_total numeric(14,2) DEFAULT 0.0,
-    currency_id smallint DEFAULT 1 NOT NULL
+    currency_id smallint DEFAULT 1 NOT NULL,
+    buyer_reference varchar(20),
+    seller_reference varchar(20),
+    due_date timestamp with time zone
 )
 INHERITS (tbl_entity)
 WITH (oids = false);

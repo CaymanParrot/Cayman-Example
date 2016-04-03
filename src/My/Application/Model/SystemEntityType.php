@@ -1,15 +1,15 @@
 <?php
 /**
- * File for System Entity class
+ * File for system entity type class
  */
 
 namespace My\Application\Model;
 
 /**
- * Class for System Entity model
+ * Class for system entity type model
  *
  */
-class SystemEntity
+class SystemEntityType
 {
     /**
      * ID
@@ -19,13 +19,13 @@ class SystemEntity
     
     /**
      * Code
-     * @var string
+     * @var string varchar(32)
      */
     public $code;
     
     /**
      * Name
-     * @var string
+     * @var string varchar(128)
      */
     public $name;
     

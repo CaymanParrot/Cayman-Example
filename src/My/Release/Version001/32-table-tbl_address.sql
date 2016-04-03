@@ -4,7 +4,7 @@ CREATE TABLE public.tbl_address (
     town varchar(100),
     city varchar(100),
     postcode varchar(10),
-    country_id smallint DEFAULT 1 NOT NULL
+    country_id smallint DEFAULT 234 NOT NULL -- 234: GB
 )
 INHERITS (tbl_entity)
 WITH (oids = false);

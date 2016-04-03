@@ -15,10 +15,10 @@ VALUES
    (6, 'category', 'Category', 'Entity categories'),
 
    (7, 'item', 'Item', 'Products and services'),
-   --(71, 'item_price', 'Prices of Items', 'Prices of products and services'),
-   --(72, 'item_cost', 'Costs of Items', 'Costs of products and services'),
+   (71, 'item_price', 'Prices of Items', 'Prices of products and services'),
+   (72, 'item_cost', 'Costs of Items', 'Costs of products and services'),
 
-   (8, 'basket', 'Basket', 'Basket of items before confirmation'),
+   -- (8, 'basket', 'Basket', 'Basket of items before confirmation'),
    (9, 'order', 'Order', 'Orders'),
    (10, 'order_item', 'Order Item', 'Items in orders'),
 

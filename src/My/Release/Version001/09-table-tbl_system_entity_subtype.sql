@@ -4,7 +4,8 @@ CREATE TABLE public.tbl_system_entity_subtype (
     name varchar(128) NOT NULL,
     short_description text,
     long_description text,
-    entity_type_id smallint NOT NULL
+    entity_type_id smallint NOT NULL,
+    default_status_id smallint
 )
 WITH (oids = false);
 

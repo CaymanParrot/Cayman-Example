@@ -2,98 +2,97 @@ SET search_path = public, pg_catalog;
 
 
 -- Data for table public.tbl_system_entity_status
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (10, 'incomplete-user', 'Incomplete', 'Incomplete user account', NULL, 1);
+INSERT INTO tbl_system_entity_status
+    (id, code, name, short_description, next_status_ids, entity_type_id, action_label)
+VALUES
+    -- TOKENS
+    (11, 'active', 'Active', 'Active token', '[12]'::jsonb, 1, 'Activate'),
+    (12, 'deleted', 'Suspended', 'Suspended tokne', '[]'::jsonb, 1, 'Delete'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (11, 'active-user', 'Active', 'Active user', NULL, 1);
+    -- USERS
+    (20, 'incomplete', 'Incomplete', 'Incomplete user', '[21]'::jsonb, 2, ''),
+    (21, 'active', 'Active', 'Active user', '[22,23]'::jsonb, 2, 'Activate'),
+    (22, 'suspended', 'Suspended', 'Suspended user', '[21,23]'::jsonb, 2, 'Suspend'),
+    (23, 'deleted', 'Deleted', 'Deleted user', '[21,22]'::jsonb, 2, 'Delete'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (12, 'suspended-user', 'Suspended', 'Suspended user', NULL, 1);
+    -- COMPANIES
+    (30, 'incomplete', 'Incomplete', 'Incomplete company', '[31]'::jsonb, 3, ''),
+    (31, 'active', 'Active', 'Active company', '[32,33]'::jsonb, 3, 'Activate'),
+    (32, 'suspended', 'Suspended', 'Suspended company', '[31,33]'::jsonb, 3, 'Suspend'),
+    (33, 'deleted', 'Closed', 'Closed company account', '[31]'::jsonb, 3, 'Delete'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (13, 'deleted-user', 'Deleted', 'Deleted user', NULL, 1);
+    -- ADDRESSES
+    (41, 'active', 'Active', 'Active address', '[42]'::jsonb, 4, 'Activate'),
+    (42, 'deleted', 'Old address', 'Old address', '[41]'::jsonb, 4, 'Delete'),
 
+    -- PHONE NUMBERS
+    (51, 'active', 'Active', 'Active phone number', '[52]'::jsonb, 5, 'Activate'),
+    (52, 'deleted', 'Old phone number', 'Old phone number', '[51]'::jsonb, 5, 'Delete'),
+    
+    -- CATEGORIES
+    (61, 'active', 'Active', 'Active category', '[62]'::jsonb, 6, 'Activate'),
+    (62, 'deleted', 'Deleted', 'Deleted category', '[61]'::jsonb, 6, 'Delete'),
 
+    -- ITEMS
+    (71, 'active', 'Available', 'Available item', '[72,73]'::jsonb, 7, 'Activate'),
+    (72, 'suspended', 'Unavailable', 'Unavailable item', '[71,73]'::jsonb, 7, 'Suspend'),
+    (73, 'deleted', 'Discontinued', 'Discontinued item', '[71]'::jsonb, 7, 'Delete'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (20, 'incomplete-company', 'Incomplete', 'Incomplete company account', NULL, 2);
+    -- ITEM PRICES
+    (711, 'active', 'Active', 'Active item price', '[]'::jsonb, 71, 'Activate'),
+    -- ITEM COSTS
+    (721, 'active', 'Active', 'Active item cost', '[]'::jsonb, 72, 'Activate'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (21, 'active-company', 'Active', 'Active company', NULL, 2);
+    -- CUSTOMER ORDERS
+    (9100, 'draft', 'Draft', 'Draft order', '[9101]'::jsonb, 9, 'Draft'),
+    (9101, 'open', 'Open', 'Open order', '[9100,9102,9103,9104]'::jsonb, 9, 'Submit'),
+    (9102, 'confirmed', 'Confirmed', 'Order confirmed by seller', '[9103,9104,9105]'::jsonb, 9, 'Confirm'),
+    (9103, 'rejected', 'Rejected', 'Order rejected by seller', '[]'::jsonb, 9, 'Reject'),
+    (9104, 'cancelled', 'Cancelled', 'Order cancelled by customer', '[]'::jsonb, 9, 'Cancel'),
+    (9105, 'packing', 'Packing', 'Packing items', '[9106]'::jsonb, 9, 'Pack'),
+    (9106, 'delivering', 'Delivering', 'Order being delivered', '[9107]'::jsonb, 9, 'Deliver'),
+    (9107, 'paid', 'Paid', 'Payment taken', '[9108]'::jsonb, 9, 'Take payment'),
+    (9108, 'complete', 'Completed', 'Ordered completed', '[]'::jsonb, 9, 'Complete'),
+    
+    -- RETAILER ORDERS
+    (9200, 'draft', 'Draft', 'Draft order', '[9201,9202]'::jsonb, 9, 'Draft'),
+    (9201, 'requested-quote', 'Awaiting Quote', 'Awaiting quote', '[9200,9202,9203]'::jsonb, 9, 'Request Quote'),
+    (9202, 'cancelled', 'Cancelled', 'Order cancelled', '[]'::jsonb, 9, 'Cancel'),
+    (9203, 'pricing', 'Pricing', 'Entering prices', '[9204]'::jsonb, 9, 'Prepare/Revise Quote'),
+    (9204, 'priced', 'Priced', 'Quote ready, awaiting manager''s approval', '[9205]'::jsonb, 9, 'Quote Ready'),
+    (9205, 'quoted', 'Quoted', 'Quote sent to customer', '[9206,9207]'::jsonb, 9, 'Send Quote'),
+    (9206, 'confirmed', 'Confirmed', 'Quote confirmed by customer', '[9208]'::jsonb, 9, 'Confirm'),
+    (9207, 'rejected', 'Rejected', 'Quote rejected by customer', '[]'::jsonb, 9, 'Reject'),
+    (9208, 'packing', 'Packing', 'Packing items', '[9209]'::jsonb, 9, 'Pack'),
+    (9209, 'delivering', 'Delivering', 'Order being delivered', '[]'::jsonb, 9, 'Deliver'),
+    (9210, 'paid', 'Paid', 'Payment taken', '[9211]'::jsonb, 9, 'Payment'),
+    (9211, 'complete', 'Completed', 'Ordered completed', '[]'::jsonb, 9, 'Complete'),
+    
+    -- WHOLESALER ORDERS
+    (9300, 'draft', 'Draft', 'Draft order', '[9301]'::jsonb, 9, 'Revise'),
+    (9301, 'requested-quote', 'Awaiting Quote', 'Awaiting quote', '[9300,9302,9303]'::jsonb, 9, 'Request Quote'),
+    (9302, 'cancelled', 'Cancelled', 'Order cancelled', '[]'::jsonb, 9, 'Cancel'),
+    (9303, 'pricing', 'Pricing', 'Entering prices', '[9304]'::jsonb, 9, 'Prepare/Revise Quote'),
+    (9304, 'priced', 'Priced', 'Quote ready, awaiting manager''s approval', '[9305]'::jsonb, 9, 'Quote Ready'),
+    (9305, 'quoted', 'Quoted', 'Quote received', '[9306,9307]'::jsonb, 9, 'Receive Quote'),
+    (9306, 'confirmed', 'Confirmed', 'Quote confirmed', '[9308]'::jsonb, 9, 'Confirm'),
+    (9307, 'rejected', 'Rejected', 'Quote rejected', '[]'::jsonb, 9, 'Reject'),
+    (9308, 'packing', 'Packing', 'Packing items', '[9309]'::jsonb, 9, 'Pack'),
+    (9309, 'delivering', 'Delivering', 'Order being delivered', '[]'::jsonb, 9, 'Deliver'),
+    (9310, 'paid', 'Paid', 'Payment made', '[9311]'::jsonb, 9, 'Payment'),
+    (9311, 'complete', 'Completed', 'Ordered completed', '[]'::jsonb, 9, 'Complete'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (22, 'suspended-company', 'Suspended', 'Suspended company', NULL, 2);
+    -- ORDER ITEMS
+    (101, 'active', 'Active', 'Active order item', '[102,103]'::jsonb, 10, 'Activate'),
+    (102, 'cancelled', 'Cancelled', 'Cancelled order item', '[101]'::jsonb, 10, 'Cancel'),
+    (103, 'deleted', 'Deleted', 'Deleted order item', '[101]'::jsonb, 10, 'Delete'),
 
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (23, 'closed-company', 'Closed', 'Closed company account', NULL, 2);
+    -- ASSETS
+    (111, 'active', 'Active', 'Active asset', '[112]'::jsonb, 11, 'Undelete'),
+    (112, 'deleted', 'Deleted', 'Deleted asset', '[111]'::jsonb, 11, 'Delete'),
 
-
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (31, 'active-address', 'Active', 'Active address', NULL, 3);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (32, 'deleted-address', 'Old address', 'Old address', NULL, 3);
-
-
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (41, 'active-phone', 'Active', 'Active phone number', NULL, 4);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (42, 'deleted-phone', 'Old phone number', 'Old phone number', NULL, 4);
-
-
-
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (51, 'available-item', 'Available', 'Available item', NULL, 5);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (52, 'unavailable-item', 'Unavailable', 'Unavailable item', NULL, 5);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (53, 'discontinued-item', 'Discontinued', 'Discontinued item', NULL, 5);
-
-
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (60, 'draft-page', 'Draft', 'Draft page', NULL, 6);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (61, 'published-page', 'Published', 'Published page', NULL, 6);
-
-
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (70, 'draft-order', 'Draft', 'Draft order', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (71, 'submitted-order', 'Submitted', 'Submitted order', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (72, 'pricing-order', 'Pricing', 'Pricing order', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (73, 'priced-order', 'Awaiting customer confirmation', 'Pricing done, awaiting customer confirmation', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (74, 'confirmed-order', 'Customer confirmed', 'Order confirmed by customer', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (75, 'in-progress-order', 'In Progress', 'Order in progress', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (76, 'delivered-order', 'Delivered', 'Order delivered', NULL, 7);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (77, 'canceled-order', 'Canceled', 'Order canceled', NULL, 7);
-
-
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (111, 'active-asset', 'Active', 'Active asset', NULL, 11);
-
-INSERT INTO tbl_system_entity_status (id, code, name, short_description, long_description, entity_type_id)
-VALUES (112, 'inactive-asset', 'Inactive', 'Inactive/broken asset', NULL, 11);
+    -- PAGES
+    (121, 'draft', 'Draft', 'Draft page', '[]'::jsonb, 12, 'Unpublish'),
+    (122, 'published', 'Published', 'Published page', '[]'::jsonb, 12, 'Publish'),
+    (123, 'deleted', 'Deleted', 'Deleted page', '[]'::jsonb, 12, 'Delete')
+;

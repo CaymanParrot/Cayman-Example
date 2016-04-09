@@ -8,13 +8,14 @@ VALUES
     (12, 'auth-token', 'Authentication token', 1, 11),
 
     (20, 'system-user', 'System user', 2, 21),
-    (21, 'buyer-user', 'Buyer user', 2, 21),
-    (22, 'seller-user', 'Seller user', 2, 21),
+    (21, 'individual-user', 'Individual user', 2, 21),
+    (22, 'company-user', 'Company user', 2, 21),
 
-    (30, 'system-company', 'System company', 3, 31),
-    (31, 'retailer-company', 'Retailer', 3, 31),
-    (32, 'wholesaler-company', 'Wholesaler', 3, 31),
-    (33, 'supplier-company', 'Supplier company', 3, 31),
+    (30, 'system-account', 'System account', 3, 31),
+    (31, 'individual-account', 'Individual account', 3, 31),
+    (32, 'retailer-account', 'Retailer account', 3, 31),
+    (33, 'wholesaler-account', 'Wholesaler account', 3, 31),
+    (34, 'supplier-account', 'Supplier account', 3, 31),
 
     (41, 'billing-address', 'Billing address', 4, 41),
     (42, 'delivery-address', 'Delivery address', 4, 41),

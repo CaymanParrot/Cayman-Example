@@ -40,7 +40,7 @@ CREATE INDEX tbl_category_idx_account_id_owner
 ALTER TABLE ONLY tbl_category
     ADD CONSTRAINT tbl_category_fkey_account_id_owner
     FOREIGN KEY (account_id_owner)
-    REFERENCES tbl_account_seller(id)
+    REFERENCES tbl_account(id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;

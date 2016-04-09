@@ -24,7 +24,7 @@ CREATE INDEX tbl_order_idx_buyer
 ALTER TABLE ONLY tbl_order
     ADD CONSTRAINT tbl_order_fkey_buyer
     FOREIGN KEY (account_id_buyer) 
-    REFERENCES tbl_account_buyer(id)
+    REFERENCES tbl_account(id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
@@ -35,7 +35,7 @@ CREATE INDEX tbl_order_idx_seller
 ALTER TABLE ONLY tbl_order
     ADD CONSTRAINT tbl_order_fkey_seller
     FOREIGN KEY (account_id_seller) 
-    REFERENCES tbl_account_seller(id)
+    REFERENCES tbl_account(id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;

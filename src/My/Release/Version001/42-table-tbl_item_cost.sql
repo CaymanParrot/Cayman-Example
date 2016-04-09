@@ -24,7 +24,7 @@ ALTER TABLE ONLY tbl_item_cost
 ALTER TABLE ONLY tbl_item_cost
     ADD CONSTRAINT tbl_item_cost_fkey_seller_id
     FOREIGN KEY (seller_id) 
-    REFERENCES tbl_account_seller(id)
+    REFERENCES tbl_account(id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;

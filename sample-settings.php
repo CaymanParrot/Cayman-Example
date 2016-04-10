@@ -11,12 +11,13 @@ return [
     'application' => [
         'name'       => 'Example',
         'version'    => 'v1.0',
-        'api_url'    => 'https://api.example.com',
+        'api_url'    => 'https://[host-code].example.com',
         'api_prefix' => '/api/v1',
-        'app_url'    => 'https://app.example.com',
+        'app_url'    => 'https://[host-code].example.com',
         'services'   => [
             'namespace' => '\\Example\\Application\\Service',
         ],
+        'host_account_id' => 'random-uuid',// ID of host account
     ],
     
     'services' => [
@@ -59,12 +60,10 @@ return [
         'db' => [
             'default' => [
                 'factory'  => '\\Cayman\\Manager\\DbManager\\PostgreSql::newManager',
-            ],
-        ],
-        
-        'dbschema' => [
-            'default' => [
-                'factory'  => '\\Cayman\\Manager\\DbSchemaManager\\PostgreSql::newManager',
+                'settings' => [
+                    'catalog' => 'dbname',
+                    'schema'  => 'public',
+                ],
             ],
         ],
         

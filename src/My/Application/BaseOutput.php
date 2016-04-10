@@ -5,7 +5,7 @@
 
 namespace My\Application;
 
-use My\Application\Model\User;
+//use My\Application\Db\UserRow;
 
 //use Cayman\Application\HttpOutput;
 
@@ -19,10 +19,14 @@ class BaseOutput
     use \Cayman\Library\ObjectDeHydratorTrait;
     
     /**
-     * Users
-     * @var User[]
+     * Data array
+     * @var array
      */
     public $data = [];
     
+    /**
+     * Meta, additional info
+     * @var array
+     */
     public $meta = [];
 }

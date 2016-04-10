@@ -6,7 +6,7 @@
 namespace My\Application\Service\Account;
 
 use My\Application\BaseService;
-use My\Application\Model\User as UserModel;
+use My\Application\Db\UserRow;
 
 /**
  * Class for User service
@@ -23,8 +23,8 @@ class User extends BaseService
     {
         $output = new User\Index\Output();
         
-        $output->data[] = new UserModel();
-        $output->data[] = new UserModel();
+        $output->data[] = new UserRow();
+        $output->data[] = new UserRow();
         
         return $output;
     }

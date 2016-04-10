@@ -8,7 +8,8 @@ CREATE TABLE public.tbl_account (
     is_buyer BOOLEAN DEFAULT false NOT NULL,
     is_seller BOOLEAN DEFAULT false NOT NULL,
     currency_id smallint DEFAULT 1 NOT NULL,
-    target_profit_pctg numeric(5,2)
+    target_profit_pctg numeric(5,2),
+	url VARCHAR(128)
 )
 INHERITS (tbl_entity)
 WITH (oids = false);
@@ -36,3 +37,5 @@ ALTER TABLE ONLY tbl_account
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
+CREATE UNIQUE INDEX tbl_account_unq_url
+    ON public.tbl_account USING btree (url);

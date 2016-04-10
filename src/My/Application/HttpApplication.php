@@ -13,5 +13,8 @@ use Cayman\Application\HttpApplication as CaymanHttpApp;
  */
 class HttpApplication extends CaymanHttpApp
 {
-    
+    function afterNewSettings()
+    {
+        
+    }
 }

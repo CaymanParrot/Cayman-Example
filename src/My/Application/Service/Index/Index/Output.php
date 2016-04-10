@@ -5,9 +5,7 @@
 
 namespace My\Application\Service\Index\Index;
 
-use My\Application\Model\User;
-
-//use Cayman\Application\HttpOutput;
+use My\Application\Db\UserRow;
 
 
 /**
@@ -20,7 +18,7 @@ class Output
     
     /**
      * Users
-     * @var User[]
+     * @var UserRow[]
      */
     public $data = [];
     

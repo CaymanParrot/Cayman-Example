@@ -25,6 +25,11 @@ class Token extends BaseService
     {
         $output = new Token\Create\Output();
         
+        $dbManager = $this->getApp()->getDbManager();
+        
+        
+        $dbManager->dbSelect($input);
+        
         $token = new TokenRow();
         $token->type  = $input->type;
         $token->email = $input->email;
@@ -33,7 +38,7 @@ class Token extends BaseService
         //$entityManager = $this->getApp()->getEntityManager();
         //$entityManager->entityCreate($token);
         
-        $dbManager = $this->getApp()->getDbManager();
+        
         $data = [
             'email' => $token->email,
             'code'   => $token->code,

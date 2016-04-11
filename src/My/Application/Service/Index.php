@@ -10,6 +10,8 @@ use My\Application\BaseService;
 use My\Application\Db\EntityRow;
 use My\Application\Db\UserRow;
 
+use Cayman\Manager\DbManager\InputForSelect;
+
 /**
  * Class for Index service
  *
@@ -24,23 +26,23 @@ class Index extends BaseService
         
         $output = new Index\Index\Output();
 		
-		//ob_start();
-		//phpinfo();
-		//$data = ob_get_clean();
-        //$output->meta[] = $data;
-		
         //testing db
-        $sql  = 'select * from public.tbl_entity';
-        $rows1 = $this->getApp()->getDbManager()->dbFetchAllClasses($sql, [], EntityRow::class);
+        $inputForSelect = new InputForSelect();
+        $inputForSelect->sql       = 'select * from public.tbl_entity';
+        $inputForSelect->className = EntityRow::class;
+        $outputForSelect = $this->getApp()->getDbManager()->dbSelect($inputForSelect);
+        $rows1 = $outputForSelect->rows;
         
-        //$sql  = 'select * from public.tbl_user';
-        //$rows2 = $this->getApp()->getDbManager()->dbFetchAllClasses($sql, [], UserRow::class);
+        $inputForSelect2 = new InputForSelect();
+        $inputForSelect2->sql       = 'select * from public.tbl_user';
+        $inputForSelect2->className = UserRow::class;
+        $outputForSelect2 = $this->getApp()->getDbManager()->dbSelect($inputForSelect2);
+        $rows2 = $outputForSelect2->rows;
         
-        //$rows = $this->getApp()->getDbManager()->dbFetchAllRows($sql);
-        
-        
-        $output->data = $rows1;//array_merge($rows1, $rows2);
-        $output->meta['count'] = count($rows1);// + count($rows2);
+        $output->data['entities'] = $rows1;
+        $output->data['users']    = $rows2;
+        $output->meta['entity_count'] = $outputForSelect->rowCount;
+        $output->meta['user_count']   = $outputForSelect2->rowCount;
         
         return $output;
     }

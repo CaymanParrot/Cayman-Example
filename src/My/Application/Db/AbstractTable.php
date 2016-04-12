@@ -20,12 +20,15 @@ abstract class AbstractTable extends Table
      */
     function getName()
     {
-        $ns     = __NAMESPACE__;
-        $class  = get_class($this);
-        $result = str_replace($ns, '', $class);
-        $result = str_replace('Table', '', $result);
-        $result = 'tbl_' . strtolower($result);
-        return $result;
+        if (empty($this->table_name)) {
+            $ns     = __NAMESPACE__ . '\\';
+            $class  = get_class($this);
+            $result = strtolower(str_replace($ns, '', $class));
+            $result = str_replace('table', '', $result);
+            $this->table_name = 'tbl_' . $result;
+        }
+        
+        return $this->table_name;
     }
     
     /**
@@ -34,6 +37,10 @@ abstract class AbstractTable extends Table
      */
     function getSchemaName()
     {
-        return 'public';
+        if (empty($this->table_schema)) {
+            $this->table_schema = 'public';
+        }
+        
+        return $this->table_schema;
     }
 }

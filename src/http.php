@@ -19,7 +19,17 @@ $app = new My\Application\HttpApplication();
 $app->setSettings($settings);
 
 //load input
-$input = $app->loadInput($_SERVER, $_REQUEST);
+$inputRaw = $_REQUEST;//default input
+$method   = strtolower($_SERVER['REQUEST_METHOD']);
+if (in_array($method, ['post', 'put'])) {
+    $contentType = explode(';', $_SERVER['CONTENT_TYPE']);
+    if (in_array('application/json', $contentType)) {
+        $inputJson = file_get_contents('php://input');
+        $inputRaw  = json_decode($inputJson, true); //convert JSON into array
+    }
+}
+//load input object
+$input = $app->loadInput($_SERVER, $inputRaw);
 
 //run application with input
 $output = $app->run($input);

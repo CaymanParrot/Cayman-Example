@@ -23,5 +23,5 @@ class Input extends BaseInput
      * Type of token
      * @var string
      */
-    public $type = 'email-token';
+    public $type;
 }

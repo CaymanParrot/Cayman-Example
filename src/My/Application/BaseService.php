@@ -10,6 +10,8 @@ use Cayman\Input;
 
 /**
  * Class for Base Service
+ * 
+ * @method \My\Application\HttpApplication getApp()
  *
  */
 class BaseService extends Service

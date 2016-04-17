@@ -1,10 +1,22 @@
-CREATE TABLE public.tbl_item_cost (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    item_id uuid NOT NULL,
-    seller_id uuid NOT NULL,
-    cost numeric(14,2) NOT NULL
-)
-WITH (oids = false);
+<?php
+/**
+ * File for item cost model class
+ */
+
+namespace My\Application\Db;
+
+/**
+ * Class for item cost model
+ *
+ */
+class ItemCostRow extends AbstractRow
+{
+    public $id;// uuid DEFAULT gen_random_uuid() NOT NULL,
+    public $item_id;// uuid NOT NULL,
+    public $seller_id;// uuid NOT NULL,
+    public $cost;// numeric(14,2) NOT NULL
+}
+/*
 
 ALTER TABLE ONLY tbl_item_cost
     ADD CONSTRAINT tbl_item_cost_pkey
@@ -35,3 +47,4 @@ ALTER TABLE ONLY tbl_item_cost
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
+*/

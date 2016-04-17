@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for entity user role model
  *
  */
-class EntityUserRoleRow
+class EntityUserRoleRow extends AbstractRow
 {
     public $entity_id;// uuid NOT NULL,
     public $user_id;// uuid NOT NULL,

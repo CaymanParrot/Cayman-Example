@@ -25,6 +25,7 @@ ALTER TABLE ONLY tbl_entity_user_role
     REFERENCES tbl_entity(id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
+    DEFERRABLE INITIALLY DEFERRED
 ;
 ALTER TABLE ONLY tbl_entity_user_role
     ADD CONSTRAINT tbl_entity_user_role_fkey_user
@@ -39,4 +40,5 @@ ALTER TABLE ONLY tbl_entity_user_role
     REFERENCES tbl_system_user_role(id)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
+    DEFERRABLE INITIALLY DEFERRED
 ;

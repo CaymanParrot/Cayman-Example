@@ -13,12 +13,10 @@ use My\Application\BaseService;
 use My\Application\Manager\DbManager;
 use My\Application\Manager\EntityManager;
 use My\Application\Db\SystemEntitySubtypeRow;
-use My\Application\Db\SystemEntitySubtypeTable;
 use My\Application\Db\SystemEntityTypeRow;
-use My\Application\Db\SystemEntityTypeTable;
 use My\Application\Db\TokenRow;
 use My\Application\Db\TokenTable;
-use My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndNotExpired;
+use My\Library\Password;
 
 /**
  * Class for Identity Token service
@@ -41,68 +39,123 @@ class Token extends BaseService
          * @var \My\Application\Manager\DbManager
          */
         $db = $app->getDbManager();
-        
-        //$output->data['entity_types']    = $db->SystemEntityTypeTable()->selectRows();
-        //$output->data['entity_subtypes'] = $db->SystemEntitySubtypeTable()->selectRows();
-        
         /**
-         * @var ViewSystemEntitySubtypesByCode
+         * @var \My\Application\Manager\EntityManager
          */
-        $entityTypeView = $db->ViewSystemEntityTypesByCode();
-        $entityTypeView->appendParameter('token');
-        $entityTypes = $entityTypeView->selectRows();
-        if (empty($entityTypes)) {
-            throw new Exception('Entity type for token not found');
+        $em = $app->getEntityManager();
+        
+        if (! filter_var($input->email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Valid email is required');
         }
-        /**
-         * @var SystemEntityTypeRow
-         */
-        $entityType = $entityTypes[0];
-        
-        //$output->data['token_type'] = $input->type;
-        
-        /**
-         * @var ViewSystemEntitySubtypesByCode
-         */
-        $entitySubTypeView = $db->ViewSystemEntitySubtypesByCode();
-        $entitySubTypeView->appendParameter($input->type);
-        $entitySubTypes = $entitySubTypeView->selectRows();
-        $output->data['entity_subtypes_by_code'] = $entitySubTypes;
-        
-        if (empty($entitySubTypes)) {
+        if (! in_array($input->type, ['email-token', 'auth-token'])) {
             throw new Exception('Invalid token type');
         }
-        /**
-         * @var SystemEntitySubtypeRow
-         */
-        $entitySubType = $entitySubTypes[0];
+        
+        $entityType = $em->findSystemEntityTypeByCode('token');
+        $entitySubType = $em->findSystemEntitySubtypeByCode($input->type);
         
         /**
-         * @var ViewTokensByTypeAndSubtypeAndEmailAndNotExpired
+         * @var TokenRow[]
          */
-        $tokenView = $db->ViewTokensByTypeAndSubtypeAndEmailAndNotExpired();
-        $tokenView->appendParameter($entitySubType->entity_type_id);
-        $tokenView->appendParameter($entitySubType->id);
-        $tokenView->appendParameter($input->email);
-        $tokens = $tokenView->selectRows();
-        if (! empty($tokens)) {
-            throw new Exception('Please use existing token or wait');
+        $tokens = $em->findTokensByTypeAndSubtypeAndEmailAndNotExpired(
+            $entityType->id, $entitySubType->id, $input->email
+        );
+        if (! empty($tokens) && is_array($tokens) && 3 <= count($tokens)) {
+            throw new Exception('Please use existing token(s) or wait');
         }
         
-        /**
-         * @var EntityManager
-         */
-        $entityManager = $app->getEntityManager();
         $tokenTable = $db->TokenTable();
+        $now        = new \DateTimeImmutable();
+        
         $token = new TokenRow();
-        $token->entity_type_id    = $entitySubType->entity_type_id;
+        $token->entity_type_id    = $entityType->id;
         $token->entity_subtype_id = $entitySubType->id;
+        $token->entity_status_id  = $entitySubType->default_status_id;
         $token->email             = $input->email;
-        $token->code              = Random::stringUpperCase(2) . Random::number(10, 99) . Random::stringUpperCase(2);
-        $token->expiry_date       = new DbExpression('now() + INTERVAL \'15 MINUTE\'');
-        $output->data[]           = $entityManager->entityCreate($tokenTable, $token);
+        
+        if ($input->type == 'email-token') {
+            $expiryDate  = $now->add(new \DateInterval('PT15M'));// valid 15 minutes
+            $token->code = Random::stringUpperCase(2) . Random::number(10, 99) . Random::stringUpperCase(2);
+        } else {// auth-token
+            //TODO: check password
+            $user = $em->findUserByEmail($input->email);
+            if (! Password::verify($input->password, $user->password)) {
+                throw new Exception('Invalid credentials');
+            }
+            $expiryDate   = $now->add(new \DateInterval('PT60M'));// valid 60 minutes
+            $stringDomain = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+            $token->code  = Random::stringUsingDomain(128, $stringDomain);
+            $token->user_id_owner = $user->id;
+        }
+        
+        //$token->expiry_date = new DbExpression('now() + INTERVAL \'15 MINUTE\'');
+        $token->expiry_date = $expiryDate->format('Y-m-d H:i:s.u T');//for now
+        
+        $output->token = $em->entityCreate($tokenTable, $token);
         
         return $output;
     }
     
+    /**
+     * Index of tokens
+     * @param Token\Index\Input $input
+     * @return Token\Index\Output
+     */
+    function index(Token\Index\Input $input)
+    {
+        $output = new Token\Index\Output();
+        
+        //$app = $this->getApp();
+        
+        /**
+         * @var \My\Application\Manager\DbManager
+         */
+        //$db = $app->getDbManager();
+        
+        //for debugging
+        //$output->data = $db->TokenTable()->selectRows();
+        
+        return $output;
+    }
+    
+    /**
+     * Retrieve token
+     * @param Token\Retrieve\Input $input
+     * @return Token\Retrieve\Output
+     */
+    function retrieve(Token\Retrieve\Input $input)
+    {
+        $output = new Token\Retrieve\Output();
+        
+        $app = $this->getApp();
+        
+        /**
+         * @var \My\Application\Manager\DbManager
+         */
+        $db = $app->getDbManager();
+        
+        /**
+         * @var \My\Application\Manager\EntityManager
+         */
+        $em = $app->getEntityManager();
+        
+        /**
+         * @var SystemEntityTypeRow
+         */
+        $entityType = $em->findSystemEntityTypeByCode('token');
+        
+        /**
+         * @var SystemEntitySubtypeRow
+         */
+        $entitySubType = $em->findSystemEntitySubtypeByCode($input->type);
+        
+        /**
+         * @var TokenRow
+         */
+        $output->token = $em->findTokenByTypeAndSubtypeAndEmailAndCodeAndNotExpired(
+            $entityType->id, $entitySubType->id, $input->email, $input->code
+        );
+        
+        return $output;
+    }
 }

@@ -1,11 +1,23 @@
-CREATE TABLE public.tbl_item_price (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    item_id uuid NOT NULL,
-    buyer_category_id uuid NOT NULL,
-    price numeric(14,2) NOT NULL
-)
-WITH (oids = false);
+<?php
+/**
+ * File for item price model class
+ */
 
+namespace My\Application\Db;
+
+/**
+ * Class for item price model
+ *
+ */
+class ItemPriceRow extends AbstractRow
+{
+    public $id;// uuid DEFAULT gen_random_uuid() NOT NULL,
+    public $item_id;// uuid NOT NULL,
+    public $buyer_category_id;// uuid NOT NULL,
+    public $price;// numeric(14,2) NOT NULL
+}
+
+/*
 ALTER TABLE ONLY tbl_item_price
     ADD CONSTRAINT tbl_item_price_pkey
     PRIMARY KEY (item_id, buyer_category_id);
@@ -35,3 +47,4 @@ ALTER TABLE ONLY tbl_item_price
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
+*/

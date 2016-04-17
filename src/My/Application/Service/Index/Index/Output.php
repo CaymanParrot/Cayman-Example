@@ -5,22 +5,11 @@
 
 namespace My\Application\Service\Index\Index;
 
-use My\Application\Db\UserRow;
-
-
 /**
  * Class for output for search action of user service
  *
  */
-class Output
+class Output extends \My\Application\BaseOutput
 {
-    use \Cayman\Library\ObjectDeHydratorTrait;
-    
-    /**
-     * Users
-     * @var UserRow[]
-     */
-    public $data = [];
-    
-    public $meta = [];
+
 }

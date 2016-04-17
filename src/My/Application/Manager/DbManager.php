@@ -38,11 +38,14 @@ use Cayman\Manager\DbManager\View;
  * @method \My\Application\Db\TokenTable               TokenTable()
  * @method \My\Application\Db\UserTable                UserTable()
  * 
- * @method \My\Application\Db\ViewEntitiesByType                                ViewEntitiesByType()
- * @method \My\Application\Db\ViewEntitiesByTypeAndSubtype                      ViewEntitiesByTypeAndSubtype()
- * @method \My\Application\Db\ViewSystemEntitySubtypesByCode                    ViewSystemEntitySubtypesByCode()
- * @method \My\Application\Db\ViewSystemEntityTypesByCode                       ViewSystemEntityTypesByCode()
- * @method \My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndNotExpired   ViewTokensByTypeAndSubtypeAndEmailAndNotExpired()
+ * @method \My\Application\Db\ViewEntitiesByType                                        ViewEntitiesByType()
+ * @method \My\Application\Db\ViewEntitiesByTypeAndSubtype                              ViewEntitiesByTypeAndSubtype()
+ * @method \My\Application\Db\ViewSystemEntitySubtypesByCode                            ViewSystemEntitySubtypesByCode()
+ * @method \My\Application\Db\ViewSystemEntityTypesByCode                               ViewSystemEntityTypesByCode()
+ * @method \My\Application\Db\ViewSystemUserRolesByCode                                 ViewSystemUserRolesByCode()
+ * @method \My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndNotExpired           ViewTokensByTypeAndSubtypeAndEmailAndNotExpired()
+ * @method \My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndCodeAndNotExpired    ViewTokensByTypeAndSubtypeAndEmailAndCodeAndNotExpired()
+ * @method \My\Application\Db\ViewUserByEmail                                           ViewUserByEmail()
  * 
  */
 class DbManager extends \Cayman\Manager\DbManager\PostgreSql
@@ -82,6 +85,13 @@ class DbManager extends \Cayman\Manager\DbManager\PostgreSql
         }
         
         return $result;
+    }
+    
+    function dbStatement(\Cayman\Manager\DbManager\InputForStatement $input)
+    {
+        $this->log(__METHOD__ . ' SQL: ' . $input->sql . PHP_EOL);
+        $this->log(__METHOD__ . ' Params: ' . json_encode($input->parameters) . PHP_EOL . PHP_EOL);
+        return parent::dbStatement($input);
     }
     
 }

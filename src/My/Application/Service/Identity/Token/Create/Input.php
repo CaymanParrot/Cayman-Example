@@ -5,14 +5,19 @@
 
 namespace My\Application\Service\Identity\Token\Create;
 
-use My\Application\BaseInput;
 
 /**
  * Class for input for create action of token service
  *
  */
-class Input extends BaseInput
+class Input extends \My\Application\BaseInput
 {
+    /**
+     * Type of token: 'email-token' or 'auth-token'
+     * @var string
+     */
+    public $type;
+    
     /**
      * Email address
      * @var string
@@ -20,8 +25,8 @@ class Input extends BaseInput
     public $email;
     
     /**
-     * Type of token
+     * Password, if type is 'auth-token'
      * @var string
      */
-    public $type;
+    public $password;
 }

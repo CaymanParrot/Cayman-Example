@@ -14,9 +14,8 @@ namespace My\Application;
  * Class for output for search action of user service
  *
  */
-class BaseOutput
+class BaseOutput extends \Cayman\ServiceOutput
 {
-    use \Cayman\Library\ObjectDeHydratorTrait;
     
     /**
      * Data array

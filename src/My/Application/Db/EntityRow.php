@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for entity model
  *
  */
-class EntityRow
+class EntityRow extends AbstractRow
 {
     /**
      * ID (UUID)

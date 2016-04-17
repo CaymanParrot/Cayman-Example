@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system release model
  *
  */
-class SystemReleaseRow
+class SystemReleaseRow extends AbstractRow
 {
     public $version;// VARCHAR(16),
     public $code;// VARCHAR(64),

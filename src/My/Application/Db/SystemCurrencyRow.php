@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system currency model
  *
  */
-class SystemCurrencyRow
+class SystemCurrencyRow extends AbstractRow
 {
     public $id;// smallint NOT NULL,
     public $code;// varchar(3) NOT NULL,

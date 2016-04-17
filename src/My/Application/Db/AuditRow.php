@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for audit model
  *
  */
-class AuditRow
+class AuditRow extends AbstractRow
 {
     public $id;//           uuid DEFAULT gen_random_uuid() NOT NULL,
     public $date_created;// timestamp with time zone DEFAULT CURRENT_TIMESTAMP,

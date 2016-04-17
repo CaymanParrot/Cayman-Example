@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system entity type model
  *
  */
-class SystemEntityTypeRow
+class SystemEntityTypeRow extends AbstractRow
 {
     /**
      * ID

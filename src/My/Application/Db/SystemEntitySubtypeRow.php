@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system entity subtype model
  *
  */
-class SystemEntitySubtypeRow
+class SystemEntitySubtypeRow extends AbstractRow
 {
     public $id;// smallint NOT NULL,
     public $code;// varchar(32) NOT NULL,

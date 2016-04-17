@@ -23,6 +23,7 @@ class ViewSystemEntitySubtypesByCode extends SystemEntitySubtypeTable
     
     function getSql()
     {
-        return parent::getSql() . ' WHERE "code" = ?';
+        return parent::getSql() . ' t '
+            . 'WHERE t.code = ?';
     }
 }

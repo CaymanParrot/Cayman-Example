@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system user role model
  *
  */
-class SystemUserRoleRow
+class SystemUserRoleRow extends AbstractRow
 {
     public $id;// smallint NOT NULL,
     public $code;// varchar(32) NOT NULL,

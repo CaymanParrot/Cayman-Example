@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system country model
  *
  */
-class SystemCountryRow
+class SystemCountryRow extends AbstractRow
 {
     public $id;// smallint NOT NULL,
     public $code;// varchar(2) NOT NULL,

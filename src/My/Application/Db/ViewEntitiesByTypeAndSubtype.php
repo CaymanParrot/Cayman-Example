@@ -23,8 +23,9 @@ class ViewEntitiesByTypeAndSubtype extends EntityTable
     
     function getSql()
     {
-        return parent::getSql()
-            . ' WHERE entity_type_id = ?'
-            . ' AND entity_subtype_id = ?';
+        return parent::getSql() . ' e '
+            . 'WHERE e.entity_type_id = ? '
+            . 'AND e.entity_subtype_id = ? '
+            . 'ORDER BY e.id';
     }
 }

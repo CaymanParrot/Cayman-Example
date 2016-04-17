@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system entity status model
  *
  */
-class SystemEntityStatusRow
+class SystemEntityStatusRow extends AbstractRow
 {
     public $id;// smallint NOT NULL,
     public $code;// varchar(32) NOT NULL,

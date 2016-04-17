@@ -23,7 +23,8 @@ class ViewEntitiesByType extends EntityTable
     
     function getSql()
     {
-        return parent::getSql()
-            . ' WHERE entity_type_id = ?';
+        return parent::getSql() . ' e '
+            . 'WHERE e.entity_type_id = ? '
+            . 'ORDER BY e.id';
     }
 }

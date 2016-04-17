@@ -10,7 +10,7 @@ namespace My\Application;
  * Class for input for search action of users service
  *
  */
-class BaseInput extends \Cayman\Input
+class BaseInput extends \Cayman\ServiceInput
 {
     
 }

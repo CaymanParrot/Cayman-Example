@@ -9,7 +9,7 @@ namespace My\Application\Db;
  * Class for system postcode area model
  *
  */
-class SystemPostcodeAreaRow
+class SystemPostcodeAreaRow extends AbstractRow
 {
     public $id;// smallint NOT NULL,
     public $code;// varchar(10) NOT NULL,

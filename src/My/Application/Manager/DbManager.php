@@ -38,11 +38,11 @@ use Cayman\Manager\DbManager\View;
  * @method \My\Application\Db\TokenTable               TokenTable()
  * @method \My\Application\Db\UserTable                UserTable()
  * 
- * @method \My\Application\Db\ViewEntitiesByType                        ViewEntitiesByType()
- * @method \My\Application\Db\ViewEntitiesByTypeAndSubtype              ViewEntitiesByTypeAndSubtype()
- * @method \My\Application\Db\ViewSystemEntitySubtypesByCode            ViewSystemEntitySubtypesByCode()
- * @method \My\Application\Db\ViewSystemEntityTypesByCode               ViewSystemEntityTypesByCode()
- * @method \My\Application\Db\ViewTokensBySubtypeAndEmailAndNotExpired  ViewTokensBySubtypeAndEmailAndNotExpired()
+ * @method \My\Application\Db\ViewEntitiesByType                                ViewEntitiesByType()
+ * @method \My\Application\Db\ViewEntitiesByTypeAndSubtype                      ViewEntitiesByTypeAndSubtype()
+ * @method \My\Application\Db\ViewSystemEntitySubtypesByCode                    ViewSystemEntitySubtypesByCode()
+ * @method \My\Application\Db\ViewSystemEntityTypesByCode                       ViewSystemEntityTypesByCode()
+ * @method \My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndNotExpired   ViewTokensByTypeAndSubtypeAndEmailAndNotExpired()
  * 
  */
 class DbManager extends \Cayman\Manager\DbManager\PostgreSql

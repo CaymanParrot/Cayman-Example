@@ -2,7 +2,7 @@ CREATE TABLE public.tbl_entity_user_role (
     entity_id uuid NOT NULL,
     user_id uuid NOT NULL,
     user_role_id smallint NOT NULL,
-    date_created timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+    date_created TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 )
 WITH (oids = false);
 
@@ -34,6 +34,10 @@ ALTER TABLE ONLY tbl_entity_user_role
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
+-- ISSUE about table inheritance and foreign keys
+-- http://www.postgresql.org/docs/9.5/static/ddl-inherit.html
+-- http://stackoverflow.com/questions/24360312/foreign-keys-table-inheritance-in-postgresql
+/*
 ALTER TABLE ONLY tbl_entity_user_role
     ADD CONSTRAINT tbl_entity_user_role_fkey_user_role
     FOREIGN KEY (user_role_id) 
@@ -42,3 +46,4 @@ ALTER TABLE ONLY tbl_entity_user_role
     ON DELETE RESTRICT
     DEFERRABLE INITIALLY DEFERRED
 ;
+*/

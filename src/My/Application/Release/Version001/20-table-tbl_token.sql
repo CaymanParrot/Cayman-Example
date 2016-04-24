@@ -1,6 +1,6 @@
 CREATE TABLE public.tbl_token (
     code varchar(200) NOT NULL,
-    expiry_date timestamp with time zone NOT NULL,
+    expiry_date TIMESTAMP(0) WITH TIME ZONE NOT NULL,
     email varchar(128),
     data jsonb
 )

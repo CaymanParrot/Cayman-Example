@@ -26,6 +26,10 @@ ALTER TABLE ONLY tbl_category_entity
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
+-- ISSUE about table inheritance and foreign keys
+-- http://www.postgresql.org/docs/9.5/static/ddl-inherit.html
+-- http://stackoverflow.com/questions/24360312/foreign-keys-table-inheritance-in-postgresql
+/*
 ALTER TABLE ONLY tbl_category_entity
     ADD CONSTRAINT tbl_category_entity_fkey_entity_id
     FOREIGN KEY (entity_id) 
@@ -33,3 +37,4 @@ ALTER TABLE ONLY tbl_category_entity
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ;
+*/

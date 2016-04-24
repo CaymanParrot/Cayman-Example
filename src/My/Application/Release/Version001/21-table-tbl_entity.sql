@@ -3,8 +3,8 @@ CREATE TABLE public.tbl_entity (
     entity_type_id smallint NOT NULL,
     entity_subtype_id smallint NOT NULL,
     entity_status_id smallint NOT NULL,
-    date_created timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    date_updated timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    date_created TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    date_updated TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     user_id_owner uuid DEFAULT myvars_get_user_id(),
     entity_id_owner uuid,
     account_id_owner uuid

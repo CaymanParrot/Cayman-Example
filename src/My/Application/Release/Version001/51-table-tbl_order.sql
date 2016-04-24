@@ -9,7 +9,7 @@ CREATE TABLE public.tbl_order (
     currency_id smallint DEFAULT 1 NOT NULL,
     buyer_reference varchar(20),
     seller_reference varchar(20),
-    due_date timestamp with time zone
+    due_date TIMESTAMP(0) WITH TIME ZONE
 )
 INHERITS (tbl_entity)
 WITH (oids = false);

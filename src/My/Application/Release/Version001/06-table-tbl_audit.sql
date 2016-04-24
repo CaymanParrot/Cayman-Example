@@ -1,6 +1,6 @@
 CREATE TABLE public.tbl_audit (
     id           uuid DEFAULT gen_random_uuid() NOT NULL,
-    date_created timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    date_created TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     user_id      uuid DEFAULT myvars_get_user_id(),
     table_name   VARCHAR(50),
     op_flag      VARCHAR(1), -- I,U,D

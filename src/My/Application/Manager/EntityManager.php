@@ -7,6 +7,7 @@ namespace My\Application\Manager;
 
 use Cayman\Manager\DbManager\View;
 use My\Exception;
+use My\Exception\ExceptionRecordNotFound;
 
 use My\Application\Db\SystemEntityTypeRow;
 use My\Application\Db\SystemEntitySubtypeRow;
@@ -72,7 +73,7 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
         $view->appendParameter($code);
         $rows = $view->selectRows();
         if (empty($rows)) {
-            throw new Exception('Entity type not found: ' . $code);
+            throw new ExceptionRecordNotFound('Entity type not found: ' . $code);
         }
         /**
          * @var SystemEntityTypeRow
@@ -102,7 +103,7 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
         $rows = $view->selectRows();
         
         if (empty($rows)) {
-            throw new Exception('Entity subtype not found: ' . $code);
+            throw new ExceptionRecordNotFound('Entity subtype not found: ' . $code);
         }
         /**
          * @var SystemEntitySubtypeRow
@@ -132,7 +133,7 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
         $rows = $view->selectRows();
         
         if (empty($rows)) {
-            throw new Exception('User role not found: ' . $code);
+            throw new ExceptionRecordNotFound('User role not found: ' . $code);
         }
         /**
          * @var SystemUserRoleRow
@@ -191,7 +192,7 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
         $view->appendParameter($code);
         $rows = $view->selectRows();
         if (empty($rows)) {
-            throw new Exception('Verification code not found');
+            throw new ExceptionRecordNotFound('Verification code not found');
         }
         $row = $rows[0];
         
@@ -216,7 +217,7 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
         $view->appendParameter($email);
         $rows = $view->selectRows();
         if (empty($rows)) {
-            throw new Exception('User not found');
+            throw new ExceptionRecordNotFound('User not found');
         }
         $row = $rows[0];
         

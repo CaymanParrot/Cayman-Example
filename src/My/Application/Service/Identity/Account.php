@@ -7,6 +7,10 @@ namespace My\Application\Service\Identity;
 
 use Cayman\Manager\EmailManager\Email;
 
+use My\Exception\ExceptionInvalidInput;
+use My\Exception\ExceptionPermissionDenied;
+use My\Exception\ExceptionRecordNotFound;
+
 use My\Library\Password;
 
 use My\Application\BaseService;
@@ -75,10 +79,10 @@ class Account extends BaseService
         
         //simple validation rules
         if (! filter_var($userData->email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception('Valid email is required');
+            throw new ExceptionInvalidInput('Valid email is required');
         }
         if (strcmp($userData->password, $userData->confirm_password) !== 0) {
-            throw new Exception('Passwords must match');
+            throw new ExceptionInvalidInput('Passwords must match');
         }
         
         $app = $this->getApp();
@@ -93,6 +97,14 @@ class Account extends BaseService
          */
         $em = $app->getEntityManager();
         
+        try {
+            $userExists = $em->findUserByEmail($userData->email);
+            if ($userExists) {
+                throw new ExceptionInvalidInput('Use different email address');
+            }
+        } catch (ExceptionRecordNotFound $ex) {
+            //user not found, email address is not registered before, OK
+        }
         $entityType    = $em->findSystemEntityTypeByCode('token');
         $entitySubType = $em->findSystemEntitySubtypeByCode('email-token');
         
@@ -104,6 +116,7 @@ class Account extends BaseService
         $entitySubTypeUser    = $em->findSystemEntitySubtypeByCode($userData->type);
         $entitySubTypeAccount = $em->findSystemEntitySubtypeByCode($accountData->type);
         $purchasingMgrRole    = $em->findSystemUserRoleByCode('purchasing-mgr');
+        //$generalMgrRole       = $em->findSystemUserRoleByCode('general-mgr');
         
         try {
             $db->dbBeginTransaction();
@@ -134,19 +147,15 @@ class Account extends BaseService
             
             $accountCreated = $em->entityCreate($accountTable, $newAccount);
             
-            // TODO: fix ERROR
-            // SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table 
-            // "tbl_entity_user_role" violates foreign key constraint "tbl_entity_user_role_fkey_entity"
-            // DETAIL:  Key (entity_id)=(8cab2db4-4f6a-4b1c-abe0-1232a4f8b716) is not present 
-            // in table "tbl_entity".
+            //removed foreign key
             //create entity user role 
-            //$entityUserRoleTable = $db->EntityUserRoleTable();
-            //$newEntityUserRole = new EntityUserRoleRow();
-            //$newEntityUserRole->user_id      = $userCreated->id;
-            //$newEntityUserRole->entity_id    = $accountCreated->id;
-            //$newEntityUserRole->user_role_id = $purchasingMgrRole->id;
+            $entityUserRoleTable = $db->EntityUserRoleTable();
+            $newEntityUserRole = new EntityUserRoleRow();
+            $newEntityUserRole->user_id      = $userCreated->id;
+            $newEntityUserRole->entity_id    = $accountCreated->id;
+            $newEntityUserRole->user_role_id = $purchasingMgrRole->id;
             
-            //$roleCreated = $em->entityCreate($entityUserRoleTable, $newEntityUserRole);
+            $roleCreated = $em->entityCreate($entityUserRoleTable, $newEntityUserRole);
             
             //login
             $inputArr = [
@@ -161,9 +170,10 @@ class Account extends BaseService
             
             $output->user    = $userCreated;
             $output->account = $accountCreated;
-            //$output->role    = $roleCreated;//issue
+            $output->role    = $roleCreated;
             $output->token   = $authTokenCreated;
         } catch (\PDOException $pex) {
+            $db->dbRollbackTransaction();
             throw $pex;
         }
         
@@ -182,16 +192,13 @@ class Account extends BaseService
         $app          = $this->getApp();
         //$settings     = $app->getSettings();
         
-        $tokenService = $app->getService('identity/token');
+        $tokenService = $app->getServiceIdentityToken();
         $inputArr = [
             'type'     => 'auth-token',
             'email'    => $input->email,
             'password' => $input->password,
         ];
         $inputForTokenCreate = new TokenCreateInput($inputArr);
-        /**
-         * @var TokenCreateOutput
-         */
         $outputForTokenCreate = $tokenService->create($inputForTokenCreate);
         $output->token = $outputForTokenCreate->token;
         

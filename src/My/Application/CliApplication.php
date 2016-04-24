@@ -26,5 +26,5 @@ use Cayman\Application\CliApplication as CaymanCliApp;
  */
 class CliApplication extends CaymanCliApp
 {
-    
+    use AppServicesTrait;
 }

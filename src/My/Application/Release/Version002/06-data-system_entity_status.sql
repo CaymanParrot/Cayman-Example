@@ -7,7 +7,7 @@ INSERT INTO tbl_system_entity_status
 VALUES
     -- TOKENS
     (11, 'active', 'Active', 'Active token', '[12]'::jsonb, 1, 'Activate'),
-    (12, 'deleted', 'Suspended', 'Suspended tokne', '[]'::jsonb, 1, 'Delete'),
+    (12, 'deleted', 'Suspended', 'Suspended token', '[]'::jsonb, 1, 'Delete'),
 
     -- USERS
     (20, 'incomplete', 'Incomplete', 'Incomplete user', '[21]'::jsonb, 2, ''),

@@ -46,4 +46,4 @@ $output->appendMeta(memory_get_peak_usage($real_usage=true)/1024, 'memory_kb');
 header('content-type: application/json; charset=utf-8');
 
 //send response body
-echo json_encode($output);
+echo json_encode($output->toArray());

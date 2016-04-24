@@ -19,6 +19,15 @@ class SystemEntityStatusRow extends AbstractRow
     public $entity_type_id;// smallint NOT NULL,
     public $next_status_ids;// jsonb,
     public $action_label;// varchar(64)
+    
+    function toArray()
+    {
+        error_log(__METHOD__ . ' id ' . $this->id);
+        $data = parent::toArray();
+        $data['next_status_ids'] = json_decode($this->next_status_ids);
+        
+        return $data;
+    }
 }
 
 /*

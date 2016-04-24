@@ -5,14 +5,13 @@
 
 namespace My\Application\Service\Bazaar;
 
-use My\Application\BaseService;
 use My\Application\Db\AccountRow;
 
 /**
  * Class for Shop service
  *
  */
-class Shop extends BaseService
+class Shop extends \My\Application\BaseService
 {
     /**
      * Index/search
@@ -24,9 +23,9 @@ class Shop extends BaseService
         $output = new Shop\Index\Output();
         
         $app = $this->getApp();
-        $em  = $app->getEntityManager();
-        $shops = $em->findAccounts();
-        $output->data = $shops;
+        $db  = $app->getDbManager();
+        $accounts = $db->AccountTable()->selectRows();
+        $output->data = $accounts;
         
         return $output;
     }

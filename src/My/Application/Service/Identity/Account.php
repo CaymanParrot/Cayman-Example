@@ -6,12 +6,11 @@
 namespace My\Application\Service\Identity;
 
 use Cayman\Manager\EmailManager\Email;
+use Cayman\Library\Password;
 
 use My\Exception\ExceptionInvalidInput;
 use My\Exception\ExceptionPermissionDenied;
 use My\Exception\ExceptionRecordNotFound;
-
-use My\Library\Password;
 
 use My\Application\BaseService;
 use My\Application\Db\AccountRow;

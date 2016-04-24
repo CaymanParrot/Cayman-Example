@@ -6,6 +6,7 @@
 namespace My\Application\Service\Identity;
 
 use Cayman\Library\Random;
+use Cayman\Library\Password;
 use Cayman\Manager\DbExpression;
 
 use My\Exception;
@@ -16,7 +17,6 @@ use My\Application\Db\SystemEntitySubtypeRow;
 use My\Application\Db\SystemEntityTypeRow;
 use My\Application\Db\TokenRow;
 use My\Application\Db\TokenTable;
-use My\Library\Password;
 
 /**
  * Class for Identity Token service

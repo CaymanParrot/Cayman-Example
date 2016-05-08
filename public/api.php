@@ -14,11 +14,11 @@ try {
     header('content-type: application/json; charset=utf-8');
     $response = [
         'status' => 'error',
-        'meta'   => [],
+        'meta'   => [
+            'uri' => $_SERVER['REQUEST_URI'],
+        ],
         'errors' => [$ex->getMessage()],
     ];
-    define('MY_APP_ENDED', microtime($get_as_float = true));
-    $response['meta']['time'] = number_format(MY_APP_ENDED - MY_APP_STARTED, 6);
+    $response['meta']['time'] = number_format(microtime(true) - MY_APP_STARTED, 6);
     echo json_encode($response);
 }
-

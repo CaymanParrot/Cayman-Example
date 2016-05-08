@@ -8,5 +8,7 @@
  */
 define('MY_APP_STARTED', microtime($get_as_float = true));
 
-//render pages
-phpinfo();
+//load settings
+$settingsArr = require __DIR__ . '/../.settings.php';
+$version = $settingsArr['application']['version'];
+header('location: /app/' . $version . '/index.html');

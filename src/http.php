@@ -28,6 +28,9 @@ if (in_array($method, ['post', 'put'])) {
         $inputRaw  = json_decode($inputJson, true); //convert JSON into array
     }
 }
+if (empty($inputRaw)) {
+    $inputRaw = [];
+}
 //load input object
 $input = $app->loadInput($_SERVER, $inputRaw);
 
@@ -41,7 +44,7 @@ $output = $app->run($input);
 
 define('MY_APP_ENDED', microtime($get_as_float = true));
 $output->appendMeta(number_format(MY_APP_ENDED - MY_APP_STARTED, 6), 'time');
-$output->appendMeta(memory_get_peak_usage($real_usage=true)/1024, 'memory_kb');
+$output->appendMeta(memory_get_peak_usage($real_usage = true)/1024, 'memory_kb');
 
 header('content-type: application/json; charset=utf-8');
 

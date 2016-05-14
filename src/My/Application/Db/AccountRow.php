@@ -11,15 +11,77 @@ namespace My\Application\Db;
  */
 class AccountRow extends EntityRow
 {
-    public $is_company;// boolean DEFAULT FALSE NOT NULL,
-    public $is_buyer;// boolean DEFAULT FALSE NOT NULL,
-    public $is_seller;// boolean DEFAULT FALSE NOT NULL,
-    public $trade_name;// varchar(128),
-    public $legal_name;// varchar(128),
-    public $vat_number;// varchar(30),
-    public $short_description;// text,
-    public $long_description;// text
-    public $currency_id;// smallint DEFAULT 1 NOT NULL,
-    public $target_profit_pctg;// numeric(5,2)
-	public $url;//varchar(128)
+    /**
+     * Is company?
+     * @var bool
+     */
+    public $is_company;
+    
+    /**
+     * Is buyer?
+     * @var bool
+     */
+    public $is_buyer;
+    
+    /**
+     * Is seller?
+     * @var bool
+     */
+    public $is_seller;
+    
+    /**
+     * Trade name
+     * SQL: max 128 char.s
+     * @var string
+     */
+    public $trade_name;
+    
+    /**
+     * Legal name
+     * SQL: max 128 char.s
+     * @var string
+     */
+    public $legal_name;
+    
+    /**
+     * VAT number
+     * SQL: max 30 char.s
+     * @var string
+     */
+    public $vat_number;
+    
+    /**
+     * Short description
+     * SQL: text
+     * @var string
+     */
+    public $short_description;
+    
+    /**
+     * Long description
+     * SQL: text
+     * @var string
+     */
+    public $long_description;
+    
+    /**
+     * Currency ID
+     * @var int
+     */
+    public $currency_id;
+    
+    /**
+     * Target profit percentage
+     * SQL: numeric(5,2)
+     * @var float
+     */
+    public $target_profit_pctg;
+    
+    /**
+     * URL
+     * e.g. 'http://united-meat.caymanparrot.com'
+     * SQL: max 128 char.s
+     * @var string
+     */
+	public $url;
 }

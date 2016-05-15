@@ -5,12 +5,14 @@
 
 namespace My\Application\Service\Account;
 
+use My\Application\Db;
 use My\Application\Db\CategoryRow;
 use My\Exception\ExceptionRecordNotFound;
 use My\Exception\ExceptionRecordNotUnique;
+use My\Exception\ExceptionInvalidInput;
 
 /**
- * Class for Shop service
+ * Class for Category service
  *
  */
 class Category extends \My\Application\BaseService
@@ -38,6 +40,9 @@ class Category extends \My\Application\BaseService
         $entitySubType = $viewSysEntitySubType->findByCode($entitySubTypeCode);
         if (empty($entitySubType)) {
             throw new ExceptionRecordNotFound('Entity subtype not found: ' . $entitySubTypeCode);
+        }
+        if (Db::ENTITY_TYPE_CATEGORY != $entitySubType->entity_type_id) {
+            throw new ExceptionInvalidInput('Invalid entity subtype');
         }
         
         $parentCategory = null;

@@ -41,7 +41,9 @@ use Cayman\Manager\DbManager\View;
  * @method \My\Application\Db\ViewBuyerAccounts                                         ViewBuyerAccounts()
  * @method \My\Application\Db\ViewSellerAccounts                                        ViewSellerAccounts()
  * @method \My\Application\Db\ViewSellerAccountByUrl                                    ViewSellerAccountByUrl()
+ * 
  * @method \My\Application\Db\ViewItemsBySeller                                         ViewItemsBySeller()
+ * @method \My\Application\Db\ViewItemByTypeAndSubtypeAndCode                           ViewItemByTypeAndSubtypeAndCode()
  * @method \My\Application\Db\ViewCategoryByTypeAndSubtypeAndCode                       ViewCategoryByTypeAndSubtypeAndCode()
  * 
  * @method \My\Application\Db\ViewEntitiesByType                                        ViewEntitiesByType()

@@ -16,3 +16,6 @@ spl_autoload_register(
         }
     }
 );
+
+// its composer setting is not good
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/PHPMailerAutoload.php';

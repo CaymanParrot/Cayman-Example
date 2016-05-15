@@ -17,6 +17,7 @@ try {
         'meta'   => [
             'uri' => $_SERVER['REQUEST_URI'],
         ],
+        'input'  => isset($inputRaw) ? $inputRaw : $_REQUEST,
         'errors' => [$ex->getMessage()],
     ];
     $response['meta']['time'] = number_format(microtime(true) - MY_APP_STARTED, 6);

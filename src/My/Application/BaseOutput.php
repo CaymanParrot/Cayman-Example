@@ -1,22 +1,16 @@
 <?php
 /**
- * File for output for search action of user service
+ * File for base output class of services
  */
 
 namespace My\Application;
 
-//use My\Application\Db\UserRow;
-
-//use Cayman\Application\HttpOutput;
-
-
 /**
- * Class for output for search action of user service
+ * Class for base output of services
  *
  */
 class BaseOutput extends \Cayman\ServiceOutput
 {
-    
     /**
      * Data array
      * @var array
@@ -28,4 +22,10 @@ class BaseOutput extends \Cayman\ServiceOutput
      * @var array
      */
     public $meta = [];
+    
+    /**
+     * Error messages
+     * @var array
+     */
+    public $errors = [];
 }

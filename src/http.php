@@ -42,6 +42,8 @@ $output = $app->run($input);
 //    header(sprintf('%s: %s', $key, $value));
 //}
 
+$output->setInput($input);
+
 define('MY_APP_ENDED', microtime($get_as_float = true));
 $output->appendMeta(number_format(MY_APP_ENDED - MY_APP_STARTED, 6), 'time');
 $output->appendMeta(memory_get_peak_usage($real_usage = true)/1024, 'memory_kb');

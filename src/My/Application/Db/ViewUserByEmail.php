@@ -26,4 +26,21 @@ class ViewUserByEmail extends UserTable
         return parent::getSql() . ' u '
             . 'WHERE u.email = ?';
     }
+    
+    /**
+     * Find user by email
+     * @param string $email
+     * @return UserRow | null
+     */
+    function findByEmail($email)
+    {
+        $row = null;
+        $this->setParameters([ $email ]);
+        $rows = $this->selectRows();
+        if (isset($rows[0])) {
+            $row = $rows[0];
+        }
+        
+        return $row;
+    }
 }

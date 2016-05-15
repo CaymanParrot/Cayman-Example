@@ -27,4 +27,21 @@ class ViewSystemUserRolesByCode extends SystemUserRoleTable
             . 'WHERE t.code = ? '
             . 'ORDER BY t.id';
     }
+    
+    /**
+     * Find user role by code
+     * @param string $code
+     * @return SystemUserRoleRow | null
+     */
+    function findByCode($code)
+    {
+        $row = null;
+        $this->setParameters([ $code ]);
+        $rows = $this->selectRows();
+        if (isset($rows[0])) {
+            $row = $rows[0];
+        }
+        
+        return $row;
+    }
 }

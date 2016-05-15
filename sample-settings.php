@@ -71,8 +71,16 @@ return [
             'default' => [
                 'factory'  => '\\Cayman\\Manager\\EmailManager\\PhpMail::newManager',
                 'settings' => [
-                    'from_email' => '',
-                    'from_name'  => '',
+                    'smtp' => [
+                        'servers'  => 'smtp1.example.com;smtp2.example.com',// Specify main and backup SMTP servers
+                        'port'     => '587',
+                        'tls'      => true,
+                        'auth'     => true,
+                        'username' => 'abcd',
+                        'password' => 'efghhijklmnopqrst',
+                    ],
+                    'from_email' => 'abc@example.com',
+                    'from_name'  => 'Admin',
                 ],
             ],
         ],

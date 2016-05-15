@@ -5,11 +5,14 @@
 
 namespace My\Application\Service\Identity\Account\Register;
 
+use Cayman\Library\ObjectHydrationMappingInterface;
+use My\Application\BaseInput;
+
 /**
  * Class for input for create action of token service
  *
  */
-class Input extends \My\Application\BaseInput implements \Cayman\Library\ObjectHydrationMappingInterface
+class Input extends BaseInput implements ObjectHydrationMappingInterface
 {
     /**
      * Type of token

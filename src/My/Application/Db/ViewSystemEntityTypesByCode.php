@@ -27,4 +27,21 @@ class ViewSystemEntityTypesByCode extends SystemEntityTypeTable
             . 'WHERE t.code = ? '
             . 'ORDER BY t.id';
     }
+    
+    /**
+     * Find entity type by code
+     * @param string $code
+     * @return SystemEntityTypeRow | null
+     */
+    function findByCode($code)
+    {
+        $row = null;
+        $this->setParameters([ $code ]);
+        $rows = $this->selectRows();
+        if (isset($rows[0])) {
+            $row = $rows[0];
+        }
+        
+        return $row;
+    }
 }

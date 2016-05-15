@@ -5,13 +5,11 @@
 
 namespace My\Application\Service\Bazaar\Shop\Index;
 
-use My\Application\BaseInput;
-
 /**
  * Class for input for index action of shop service
  *
  */
-class Input extends BaseInput
+class Input extends \My\Application\BaseInputWithToken
 {
     /**
      * UUID of category of sellers

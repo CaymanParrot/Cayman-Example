@@ -9,6 +9,7 @@ use Cayman\Manager\DbManager\View;
 use My\Exception;
 use My\Exception\ExceptionRecordNotFound;
 
+use My\Application\Db;
 use My\Application\Db\SystemEntityTypeRow;
 use My\Application\Db\SystemEntitySubtypeRow;
 use My\Application\Db\SystemUserRoleRow;
@@ -67,7 +68,7 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
          */
         $db = $this->getDbManager();
         /**
-         * @var ViewSystemEntitySubtypesByCode
+         * @var \My\Application\Db\ViewSystemEntitySubtypesByCode
          */
         $view = $db->ViewSystemEntityTypesByCode();
         $view->appendParameter($code);
@@ -195,6 +196,45 @@ class EntityManager extends \Cayman\Manager\EntityManager\PostgreSql
             throw new ExceptionRecordNotFound('Verification code not found');
         }
         $row = $rows[0];
+        
+        return $row;
+    }
+    
+    /**
+     * Find token by type, subtype, code and not expired
+     * @param int    $typeId
+     * @param int    $subTypeId
+     * @param string $code
+     * @return TokenRow
+     */
+    function findTokenByTypeAndSubtypeAndCodeAndNotExpired($typeId, $subTypeId, $code)
+    {
+        /**
+         * @var \My\Application\Manager\DbManager
+         */
+        $db = $this->getDbManager();
+        /**
+         * @var ViewTokenByTypeAndSubtypeAndCodeAndNotExpired
+         */
+        $view = $db->ViewTokenByTypeAndSubtypeAndCodeAndNotExpired();
+        $row  = $view->findByTypeAndSubtypeAndCode($typeId, $subTypeId, $code);
+        if (empty($row)) {
+            throw new ExceptionRecordNotFound('Token not found');
+        }
+        
+        return $row;
+    }
+    
+    /**
+     * Find auth token by type, subtype, code and not expired
+     * @param string $code
+     * @return TokenRow
+     */
+    function findAuthTokenByCode($code)
+    {
+        $typeId    = Db::ENTITY_TYPE_TOKEN;
+        $subTypeId = Db::ENTITY_SUBTYPE_AUTH_TOKEN;
+        $row = $this->findTokenByTypeAndSubtypeAndCodeAndNotExpired($typeId, $subTypeId, $code);
         
         return $row;
     }

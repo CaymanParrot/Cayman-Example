@@ -5,6 +5,7 @@
 
 namespace My\Application\Service\Identity\Token\Create;
 
+use My\Application\Db\TokenRow;
 
 /**
  * Class for output for create action of token service

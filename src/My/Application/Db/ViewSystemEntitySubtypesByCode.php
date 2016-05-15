@@ -26,4 +26,22 @@ class ViewSystemEntitySubtypesByCode extends SystemEntitySubtypeTable
         return parent::getSql() . ' t '
             . 'WHERE t.code = ?';
     }
+    
+    /**
+     * Find entity subtype by code
+     * @param string $code
+     * @return SystemEntitySubtypeRow | null
+     */
+    function findByCode($code)
+    {
+        $row = null;
+        $this->setParameters([ $code ]);
+        $rows = $this->selectRows();
+        
+        if (isset($rows[0])) {
+            $row = $rows[0];
+        }
+        
+        return $row;
+    }
 }

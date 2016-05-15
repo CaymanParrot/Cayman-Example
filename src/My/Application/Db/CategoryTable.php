@@ -11,5 +11,5 @@ namespace My\Application\Db;
  */
 class CategoryTable extends AbstractTable
 {
-    
+
 }

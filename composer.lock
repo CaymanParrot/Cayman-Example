@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "21de2ca7848ec5ce41f7b193d5c8d24c",
-    "content-hash": "74d990b9f804f1debc6d229945a3dd67",
+    "hash": "84be706922b36d4a6309fe509fa412f5",
+    "content-hash": "0f44b9681c6cccce948bcbdeae8097d2",
     "packages": [
         {
             "name": "caymanparrot/cayman",
@@ -17,7 +17,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CaymanParrot/Cayman/zipball/a7c9ba83c97886eda366c76f7bc44c7721b048d6",
+                "url": "https://api.github.com/repos/CaymanParrot/Cayman/zipball/b5c06aa203659d1ce3756621114385ccba7b0819",
                 "reference": "6041da53c0eaa439e0b294595090e1542f455b39",
                 "shasum": ""
             },
@@ -48,6 +48,66 @@
             "description": "Foundations for a new simple fast PHP API/Service layer",
             "homepage": "https://github.com/CaymanParrot/Cayman.git",
             "time": "2016-03-13 12:45:02"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v5.2.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c",
+                "reference": "d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "suggest": {
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "class.phpmailer.php",
+                    "class.phpmaileroauth.php",
+                    "class.phpmaileroauthgoogle.php",
+                    "class.smtp.php",
+                    "class.pop3.php",
+                    "extras/EasyPeasyICS.php",
+                    "extras/ntlm_sasl_client.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2016-05-10 18:39:36"
         }
     ],
     "packages-dev": [],

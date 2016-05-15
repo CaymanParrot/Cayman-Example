@@ -42,14 +42,18 @@ use Cayman\Manager\DbManager\View;
  * @method \My\Application\Db\ViewSellerAccounts                                        ViewSellerAccounts()
  * @method \My\Application\Db\ViewSellerAccountByUrl                                    ViewSellerAccountByUrl()
  * @method \My\Application\Db\ViewItemsBySeller                                         ViewItemsBySeller()
+ * @method \My\Application\Db\ViewCategoryByTypeAndSubtypeAndCode                       ViewCategoryByTypeAndSubtypeAndCode()
  * 
  * @method \My\Application\Db\ViewEntitiesByType                                        ViewEntitiesByType()
  * @method \My\Application\Db\ViewEntitiesByTypeAndSubtype                              ViewEntitiesByTypeAndSubtype()
+ * 
  * @method \My\Application\Db\ViewSystemEntitySubtypesByCode                            ViewSystemEntitySubtypesByCode()
  * @method \My\Application\Db\ViewSystemEntityTypesByCode                               ViewSystemEntityTypesByCode()
  * @method \My\Application\Db\ViewSystemUserRolesByCode                                 ViewSystemUserRolesByCode()
+ * 
  * @method \My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndNotExpired           ViewTokensByTypeAndSubtypeAndEmailAndNotExpired()
  * @method \My\Application\Db\ViewTokensByTypeAndSubtypeAndEmailAndCodeAndNotExpired    ViewTokensByTypeAndSubtypeAndEmailAndCodeAndNotExpired()
+ * @method \My\Application\Db\ViewTokenByTypeAndSubtypeAndCodeAndNotExpired             ViewTokenByTypeAndSubtypeAndCodeAndNotExpired()
  * 
  * @method \My\Application\Db\ViewUserByEmail                                           ViewUserByEmail()
  * 
